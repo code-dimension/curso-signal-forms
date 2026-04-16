@@ -13,6 +13,7 @@
           "skipTests": true
         },
         "@schematics/angular:component": {
+          "changeDetection": "OnPush",
           "skipTests": true,
           "type": "component",
           "addTypeToClassName": false
