@@ -1,34 +1,32 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterOutlet, FormField, JsonPipe],
+  imports: [RouterOutlet, FormField, JsonPipe, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class App {
-  protected formModel = signal({
-    name: '',
-    email: '',
-  });
+  protected menuItems = signal(this.createMenuItems());
 
-  protected form = form(this.formModel);
-
-  protected reset() {
-     this.form().reset({
-      email: '',
-      name: '',
+  private createMenuItems() {
+    return routes.map((route) => {
+      return {
+        label: this.createMenuItemLabel(route.path!),
+        route: route.path,
+      };
     });
   }
 
-  protected setValue() {
-    this.formModel.set({
-      email: 'email@gake.com',
-      name: 'Fake',
-    });
+  private createMenuItemLabel(route: string) {
+    return route
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 }

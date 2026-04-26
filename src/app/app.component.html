@@ -1,21 +1,26 @@
-<div class="flex flex-col items-center p-8">
-  <fieldset class="fieldset">
-    <legend class="fieldset-legend">Nome</legend>
-    <input type="text" class="input" placeholder="Digite seu nome" [formField]="form.name" />
-    <div>Dirty: {{ form.name().dirty() }}</div>
-    <div>Touched: {{ form.name().touched() }}</div>
-  </fieldset>
+<div class="navbar bg-base-100 shadow-sm">
+  <div class="navbar-start">
+    <a class="btn btn-ghost text-xl">Curso Signal Forms</a>
+  </div>
 
-  <fieldset class="fieldset">
-    <legend class="fieldset-legend">Email</legend>
-    <input type="email" class="input" placeholder="Digite seu email" [formField]="form.email" />
-     <div>Dirty: {{ form.email().dirty() }}</div>
-    <div>Touched: {{ form.email().touched() }}</div>
-  </fieldset>
+  <div class="navbar-center">
+    <ul class="menu menu-horizontal bg-base-200 rounded-box z-50">
+      <li>
+        <details class="w-56">
+          <summary>Casos de uso</summary>
+          <ul>
+            @for (item of menuItems(); track item.route) {
+              <li>
+                <a [routerLink]="item.route">{{ item.label }}</a>
+              </li>
+            }
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </div>
 
-  <button class="btn btn-primary" (click)="setValue()">Set Data</button>
-  <button class="btn btn-primary" (click)="reset()">Reset</button>
-
-  <div>Form Value: {{ form().value() | json }}</div>
-  <div>Form Model: {{ formModel() | json }}</div>
+  <div class="navbar-end"></div>
 </div>
+
+<router-outlet></router-outlet>
