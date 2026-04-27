@@ -2,6 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 
+interface FormModel {
+  name: string;
+  email: string;
+}
+
 @Component({
   selector: 'app-simples-form',
   imports: [FormField, JsonPipe],
@@ -10,7 +15,7 @@ import { form, FormField } from '@angular/forms/signals';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimplesForm {
-  protected formModel = signal({
+  protected formModel = signal<FormModel>({
     name: '',
     email: '',
   });
