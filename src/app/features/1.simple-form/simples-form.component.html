@@ -1,21 +1,19 @@
-<div class="flex flex-col items-center p-8">
-  <fieldset class="fieldset">
-    <legend class="fieldset-legend">Nome</legend>
-    <input type="text" class="input" placeholder="Digite seu nome" [formField]="form.name" />
-    <div>Dirty: {{ form.name().dirty() }}</div>
-    <div>Touched: {{ form.name().touched() }}</div>
-  </fieldset>
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Nome</legend>
+  <input type="text" class="input" placeholder="Digite seu nome" [formField]="form.name" />
+  <div>Dirty: {{ form.name().dirty() }}</div>
+  <div>Touched: {{ form.name().touched() }}</div>
+</fieldset>
 
-  <fieldset class="fieldset">
-    <legend class="fieldset-legend">Email</legend>
-    <input type="email" class="input" placeholder="Digite seu email" [formField]="form.email" />
-     <div>Dirty: {{ form.email().dirty() }}</div>
-    <div>Touched: {{ form.email().touched() }}</div>
-  </fieldset>
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Email</legend>
+  <input type="email" class="input" placeholder="Digite seu email" [formField]="form.email" />
+  <div>Dirty: {{ form.email().dirty() }}</div>
+  <div>Touched: {{ form.email().touched() }}</div>
+</fieldset>
 
-  <button class="btn btn-primary" (click)="setValue()">Set Data</button>
-  <button class="btn btn-primary" (click)="reset()">Reset</button>
+<button class="btn btn-primary" (click)="setValue()">Set Data</button>
+<button class="btn btn-primary" (click)="reset()">Reset</button>
 
-  <div>Form Value: {{ form().value() | json }}</div>
-  <div>Form Model: {{ formModel() | json }}</div>
-</div>
+<div>Form Value: {{ form().value() | json }}</div>
+<div>Form Model: {{ formModel() | json }}</div>
