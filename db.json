@@ -1,0 +1,10 @@
+{
+  "profile": {
+    "personal": {
+      "name": "Pessoa Fulano 2",
+      "email": "fulano2@gmail.com"
+    },
+    "address": null
+  },
+  "$schema": "./node_modules/json-server/schema.json"
+}

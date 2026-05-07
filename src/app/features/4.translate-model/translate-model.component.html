@@ -1,0 +1,32 @@
+<form>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Nome</legend>
+    <input type="text" class="input" [formField]="form.personal.name" />
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Email</legend>
+    <input type="email" class="input" [formField]="form.personal.email" />
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">CEP</legend>
+    <input type="number" class="input" [formField]="form.address.zipcode" />
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Rua</legend>
+    <input type="text" class="input" [formField]="form.address.street" />
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Número</legend>
+    <input type="number" class="input" [formField]="form.address.number" />
+  </fieldset>
+
+  <button type="button" class="btn btn-primary" (click)="save()">Salvar</button>
+</form>
+
+<pre>
+  {{ form().value() | json }}
+</pre>
