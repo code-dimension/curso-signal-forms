@@ -1,6 +1,15 @@
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  linkedSignal,
+  OnInit,
+  resource,
+  signal,
+} from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { form, FormField } from '@angular/forms/signals';
 
 interface FormModel {
@@ -66,10 +75,10 @@ function formModelToDomainModel(form: FormModel): DomainModel {
   styleUrl: './translate-model.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TranslateModel implements OnInit {
+export class TranslateModel {
   private httpClient = inject(HttpClient);
 
-  protected formModel = signal<FormModel>({
+  private emptyFormModel = signal<FormModel>({
     personal: {
       name: '',
       email: '',
@@ -81,13 +90,19 @@ export class TranslateModel implements OnInit {
     },
   });
 
-  protected form = form(this.formModel);
+  protected profileDataRef = rxResource({
+    stream: () => this.getProfile(),
+  });
 
-  ngOnInit(): void {
-    this.getProfile().subscribe((profile) => {
-      this.formModel.set(domainModelToFormModel(profile));
-    });
-  }
+  protected formModel = linkedSignal<FormModel>(() => {
+    if (!this.profileDataRef.hasValue()) {
+      return this.emptyFormModel();
+    }
+
+    return domainModelToFormModel(this.profileDataRef.value());
+  });
+
+  protected form = form(this.formModel);
 
   protected save() {
     const payload = formModelToDomainModel(this.formModel());
