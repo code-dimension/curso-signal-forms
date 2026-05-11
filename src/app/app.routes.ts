@@ -3,6 +3,7 @@ import { SimplesForm } from './features/1.simple-form/simples-form.component';
 import { NativeFields } from './features/2.native-fields/native-fields.component';
 import { SubForms } from './features/3.sub-forms/sub-forms.component';
 import { TranslateModel } from './features/4.translate-model/translate-model.component';
+import { ArrayField } from './features/5.array-field/array-field.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: '4-translate-model',
     component: TranslateModel,
+  },
+  {
+    path: '5-array-field',
+    component: ArrayField,
   },
 ];
