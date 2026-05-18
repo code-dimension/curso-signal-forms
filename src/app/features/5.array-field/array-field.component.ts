@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { applyEach, email, form, FormField, required } from '@angular/forms/signals';
 
 interface FormModel {
   emails: string[];
@@ -18,11 +18,16 @@ export class ArrayField {
     emails: [''],
   });
 
-  protected form = form(this.formModel);
+  protected form = form(this.formModel, (schema) => {
+    applyEach(schema.emails, (schemaItem) => {
+      required(schemaItem, { message: 'Email é obrigatório' });
+      email(schemaItem, { message: 'Email inválido' });
+    });
+  });
 
   protected hasLessThanTwoEmails = computed(() => {
     return this.form.emails().value().length < 2;
-  })
+  });
 
   add() {
     this.form.emails().value.update((value) => [...value, '']);

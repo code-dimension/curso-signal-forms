@@ -13,9 +13,20 @@
         X
       </button>
     </div>
+    @if(item().touched()) {
+      @for (error of item().errors(); track error) {
+        <div class="text-error">{{ error.message }}</div>
+      }
+    }
   }
 
   <button class="btn btn-sm btn-primary mt-4" (click)="add()">Adicionar</button>
 </fieldset>
 
+<div>
+  Valid: {{ form.emails().valid() | json }}
+</div>
+<div>
+  Form Valid: {{ form().valid() | json }}
+</div>
 {{ form.emails().value() | json }}
