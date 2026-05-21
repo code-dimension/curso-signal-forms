@@ -1,0 +1,38 @@
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Username</legend>
+
+  <input
+    type="text"
+    class="input"
+    placeholder="Username do funcionário"
+    [formField]="form.username"
+  />
+
+  @for (error of form.username().errors(); track error) {
+    <div class="text-error">{{ error.message }}</div>
+  }
+
+  <div>touched: {{ form.username().touched() }}</div>
+  <div>dirty: {{ form.username().dirty() }}</div>
+  <div>valid: {{ form.username().valid() }}</div>
+  <div>invalid: {{ form.username().invalid() }}</div>
+</fieldset>
+
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Idade</legend>
+
+  <input type="number" class="input" placeholder="Idade do funcionário" [formField]="form.age" />
+  @for (error of form.age().errors(); track error) {
+    <div class="text-error">{{ error.message }}</div>
+  }
+</fieldset>
+
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Email</legend>
+
+  <input type="email" class="input" placeholder="Email do funcionário" [formField]="form.email" />
+
+  @for (error of form.email().errors(); track error) {
+    <div class="text-error">{{ error.message }}</div>
+  }
+</fieldset>
