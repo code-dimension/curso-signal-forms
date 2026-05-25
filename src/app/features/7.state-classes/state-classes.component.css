@@ -1,0 +1,11 @@
+.ng-pristine {
+  border-color: blue
+}
+
+.ng-valid {
+  border-color: green;
+}
+
+.ng-invalid {
+  border-color: red;
+}

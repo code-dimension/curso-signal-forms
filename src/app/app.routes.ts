@@ -5,6 +5,7 @@ import { SubForms } from './features/3.sub-forms/sub-forms.component';
 import { TranslateModel } from './features/4.translate-model/translate-model.component';
 import { ArrayField } from './features/5.array-field/array-field.component';
 import { Validators } from './features/6.validators/validators.component';
+import { StateClasses } from './features/7.state-classes/state-classes.component';
 
 export const routes: Routes = [
   {
@@ -30,5 +31,9 @@ export const routes: Routes = [
   {
     path: '6-validators',
     component: Validators
+  },
+  {
+    path: '7-state-classes',
+    component: StateClasses
   }
 ];
