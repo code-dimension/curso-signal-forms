@@ -10,7 +10,10 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideSignalFormsConfig({
-      classes: NG_STATUS_CLASSES
+      classes: {
+        'ng-valid': ({ state }) => state().valid() && state().touched(),
+        'ng-invalid': ({ state }) => !state().valid() && state().touched(),
+      }
     })
   ]
 };
