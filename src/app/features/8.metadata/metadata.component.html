@@ -1,0 +1,14 @@
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Username</legend>
+  <input type="text" class="input" [formField]="form.username" />
+
+  <p class="text-info">
+    {{ form.username().metadata(USERNAME_HELP)!() }}
+  </p>
+
+  @if (form.username().touched()) {
+    @for (error of form.username().errors(); track error) {
+      <p class="text-error">{{ error.message }}</p>
+    }
+  }
+</fieldset>

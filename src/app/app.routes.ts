@@ -6,6 +6,7 @@ import { TranslateModel } from './features/4.translate-model/translate-model.com
 import { ArrayField } from './features/5.array-field/array-field.component';
 import { Validators } from './features/6.validators/validators.component';
 import { StateClasses } from './features/7.state-classes/state-classes.component';
+import { Metadata } from './features/8.metadata/metadata.component';
 
 export const routes: Routes = [
   {
@@ -30,10 +31,14 @@ export const routes: Routes = [
   },
   {
     path: '6-validators',
-    component: Validators
+    component: Validators,
   },
   {
     path: '7-state-classes',
-    component: StateClasses
-  }
+    component: StateClasses,
+  },
+  {
+    path: '8-matadata',
+    component: Metadata,
+  },
 ];
