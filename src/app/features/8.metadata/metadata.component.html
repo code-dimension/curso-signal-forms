@@ -2,6 +2,10 @@
   <legend class="fieldset-legend">Username</legend>
   <input type="text" class="input" [formField]="form.username" />
 
+ <p class="text-info">
+    {{ form.username().metadata(USERNAME_GENERATOR)!() }}
+  </p>
+
   <p class="text-info">
     {{ form.username().metadata(USERNAME_HELP)!() }}
   </p>

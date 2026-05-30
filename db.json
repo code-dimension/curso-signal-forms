@@ -10,5 +10,11 @@
       "number": "123213"
     }
   },
+  "usernames": [
+    {
+      "id": 1,
+      "username": "master"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
