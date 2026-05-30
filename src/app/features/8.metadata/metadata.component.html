@@ -12,3 +12,20 @@
     }
   }
 </fieldset>
+
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Senha</legend>
+  <input type="text" class="input" [formField]="form.password" />
+
+  @for (item of form.password().metadata(HELP_LIST)!(); track item) {
+    <p class="text-info">
+      {{ item }}
+    </p>
+  }
+
+  <!-- @if (form.password().touched()) {
+    @for (error of form.password().errors(); track error) {
+      <p class="text-error">{{ error.message }}</p>
+    }
+  } -->
+</fieldset>
