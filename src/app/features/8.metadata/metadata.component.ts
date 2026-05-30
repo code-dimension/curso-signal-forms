@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import {
   createMetadataKey,
   form,
@@ -13,6 +13,13 @@ import {
 const USERNAME_HELP = createMetadataKey<string>();
 
 const HELP_LIST = createMetadataKey<string, string[]>(MetadataReducer.list());
+
+const sumReducer: MetadataReducer<number, number> = {
+  getInitial: () => 0,
+  reduce: (acc, item) => acc + item,
+};
+
+const PASSWORD_SCORE = createMetadataKey<number, number>(sumReducer);
 
 interface FormModel {
   username: string;
@@ -66,5 +73,57 @@ export class Metadata {
 
     metadata(schema.password, HELP_LIST, () => 'Mensagem 1');
     metadata(schema.password, HELP_LIST, () => 'Mensagem 2');
+
+    metadata(schema.password, PASSWORD_SCORE, (fieldContext) => {
+      if (fieldContext.value().length > 5) {
+        return 25;
+      } else {
+        return 0;
+      }
+    });
+
+    metadata(schema.password, PASSWORD_SCORE, (fieldContext) => {
+      if (/[A-Z]/.test(fieldContext.value())) {
+        return 25;
+      } else {
+        return 0;
+      }
+    });
+
+    metadata(schema.password, PASSWORD_SCORE, (fieldContext) => {
+      if (/[^a-zA-Z0-9]/.test(fieldContext.value())) {
+        return 50;
+      } else {
+        return 0;
+      }
+    });
+  });
+
+  protected passwordScore = computed(() => {
+    const score = this.form.password().metadata(PASSWORD_SCORE)!();
+
+    if (score <= 25) {
+      return 'Fraco';
+    }
+
+    if (score <= 50) {
+      return 'Normal';
+    }
+
+    return 'Forte';
+  });
+
+  protected passwordScoreClass = computed(() => {
+    const score = this.form.password().metadata(PASSWORD_SCORE)!();
+
+    if (score <= 25) {
+      return 'text-error';
+    }
+
+    if (score <= 50) {
+      return 'text-warning';
+    }
+
+    return 'text-success';
   });
 }

@@ -17,6 +17,10 @@
   <legend class="fieldset-legend">Senha</legend>
   <input type="text" class="input" [formField]="form.password" />
 
+  <p [class]="passwordScoreClass()">
+    {{ passwordScore()}}
+  </p>
+
   @for (item of form.password().metadata(HELP_LIST)!(); track item) {
     <p class="text-info">
       {{ item }}
