@@ -33,7 +33,7 @@ const sumReducer: MetadataReducer<number, number> = {
 
 const PASSWORD_SCORE = createMetadataKey<number, number>(sumReducer);
 
-const USERNAME_GENERATOR = createManagedMetadataKey((value: Signal<string | undefined>) => {
+const USERNAME_GENERATOR = createManagedMetadataKey((state, value: Signal<string | undefined>) => {
   const response = signal<string | null>(null);
 
   const debouncedValue = toSignal(toObservable(value).pipe(debounceTime(500)));
