@@ -7,6 +7,7 @@ import { ArrayField } from './features/5.array-field/array-field.component';
 import { Validators } from './features/6.validators/validators.component';
 import { StateClasses } from './features/7.state-classes/state-classes.component';
 import { Metadata } from './features/8.metadata/metadata.component';
+import { CrossFieldValidation } from './features/9.cross-field-validation/cross-field-validation.component';
 
 export const routes: Routes = [
   {
@@ -40,5 +41,9 @@ export const routes: Routes = [
   {
     path: '8-matadata',
     component: Metadata,
+  },
+  {
+    path: 'cross-field-validation',
+    component: CrossFieldValidation,
   },
 ];
