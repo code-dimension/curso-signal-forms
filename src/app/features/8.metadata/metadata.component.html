@@ -2,9 +2,11 @@
   <legend class="fieldset-legend">Username</legend>
   <input type="text" class="input" [formField]="form.username" />
 
- <p class="text-info">
-    {{ form.username().metadata(USERNAME_GENERATOR)!() }}
-  </p>
+  @if (form.username().hasMetadata(USERNAME_GENERATOR)) {
+    <p class="text-info">
+      {{ form.username().metadata(USERNAME_GENERATOR)!() }}
+    </p>
+  }
 
   <p class="text-info">
     {{ form.username().metadata(USERNAME_HELP)!() }}
@@ -22,7 +24,7 @@
   <input type="text" class="input" [formField]="form.password" />
 
   <p [class]="passwordScoreClass()">
-    {{ passwordScore()}}
+    {{ passwordScore() }}
   </p>
 
   @for (item of form.password().metadata(HELP_LIST)!(); track item) {
