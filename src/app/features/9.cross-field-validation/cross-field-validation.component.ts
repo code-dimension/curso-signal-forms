@@ -1,5 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { form, required, validate, FormField, validateTree } from '@angular/forms/signals';
+import {
+  form,
+  required,
+  validate,
+  FormField,
+  validateTree,
+  schema,
+  apply,
+} from '@angular/forms/signals';
+import { confirmPasswordSchema } from './schemas';
 
 interface FormModel {
   password: string;
@@ -31,26 +40,7 @@ export class CrossFieldValidation {
   });
 
   protected form = form(this.formModel, (schema) => {
-    required(schema.password, { message: 'Senha é obrigatório' });
-    required(schema.confirmPassword, { message: 'Confirme a senha é obrigatório' });
-
-    validate(schema.confirmPassword, ({ value, valueOf, state, stateOf }) => {
-      const confirmPasswordValue = value();
-      const passwordValue = valueOf(schema.password);
-
-      if (!state.touched() || !stateOf(schema.password).touched()) {
-        return null;
-      }
-
-      if (confirmPasswordValue !== passwordValue) {
-        return {
-          kind: 'passwordDoesNotMatch',
-          message: 'As senhas não são iguais',
-        };
-      }
-
-      return null;
-    });
+    apply(schema, confirmPasswordSchema);
 
     validateTree(schema.names, ({ value, fieldTreeOf }) => {
       const fields = Object.keys(value()).map((propName) => {
